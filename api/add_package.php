@@ -1,5 +1,7 @@
 <?php
 
+header('Content-Type: application/json');
+
 require_once '../config/database.php';
 
 $name = $_POST['package_name'];

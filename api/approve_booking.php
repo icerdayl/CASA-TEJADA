@@ -1,8 +1,10 @@
 <?php
 
+header('Content-Type: application/json');
+
 require_once '../config/database.php';
 
-$id = $_GET['id'];
+$id = $_POST['id'] ?? $_GET['id'] ?? 0;
 
 $stmt = $pdo->prepare(
 "UPDATE bookings
@@ -12,6 +14,7 @@ WHERE id=?"
 
 $stmt->execute([$id]);
 
-header(
-"Location: ../admin/bookings.php"
-);
+echo json_encode([
+	'success' => true,
+	'message' => 'Booking approved successfully.'
+]);

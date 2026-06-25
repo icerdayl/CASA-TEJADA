@@ -13,6 +13,28 @@ try {
     $extra_room = isset($_POST['extra_room']) ? 1 : 0;
     $function_hall_ac = isset($_POST['function_hall_ac']) ? 1 : 0;
 
+    if (
+        empty($customer_name) ||
+        empty($customer_email) ||
+        empty($customer_phone) ||
+        empty($reservation_date) ||
+        empty($package_id)
+    ) {
+        echo json_encode([
+            'success' => false,
+            'message' => 'Please complete all fields.'
+        ]);
+        exit;
+    }
+
+    if (!filter_var($customer_email, FILTER_VALIDATE_EMAIL)) {
+        echo json_encode([
+            'success' => false,
+            'message' => 'Invalid email address.'
+        ]);
+        exit;
+    }
+
     // Check availability
     $check = $pdo->prepare(
         "SELECT COUNT(*) FROM bookings

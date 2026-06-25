@@ -32,22 +32,23 @@ hall.addEventListener('change', calculateTotal);
 
 document.getElementById('bookingForm').addEventListener('submit', async function(e) {
   e.preventDefault();
+  document.getElementById('loader').hidden = false;
   const formData = new FormData(this);
-  const response = await fetch('api/booking.php', {
-    method: 'POST',
-    body: formData
-  });
-  const result = await response.json();
-  const resultBox =
-document.getElementById(
-'bookingResult'
-);
+  try {
+    const response = await fetch('api/booking.php', {
+      method: 'POST',
+      body: formData
+    });
+    const result = await response.json();
 
-resultBox.classList.remove(
-'hidden'
-);
+    if (!response.ok || !result.success) {
+      alert(result.message || 'Unable to submit reservation.');
+      return;
+    }
 
-resultBox.innerHTML = `
+    const resultBox = document.getElementById('bookingResult');
+    resultBox.hidden = false;
+    resultBox.innerHTML = `
 
 <h2 class="text-2xl font-bold text-green-700 mb-3">
 Reservation Submitted Successfully
@@ -66,7 +67,8 @@ ${result.reference_number}
 
 <button
 onclick="navigator.clipboard.writeText('${result.reference_number}')"
-class="mt-4 bg-teal-600 text-white px-4 py-2 rounded-lg">
+style="cursor: pointer;"
+class="mt-4 bg-teal-600 text-white px-4 py-2 rounded-lg cursor-pointer">
 
 Copy Reference Number
 
@@ -74,8 +76,14 @@ Copy Reference Number
 
 `;
 
-window.scrollTo({
-top:document.body.scrollHeight,
-behavior:'smooth'
-});
+    window.scrollTo({
+      top: document.body.scrollHeight,
+      behavior: 'smooth'
+    });
+  } catch (error) {
+    alert('Unable to connect to the server. Please try again.');
+    console.log(error);
+  } finally {
+    document.getElementById('loader').hidden = true;
+  }
 });

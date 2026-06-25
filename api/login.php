@@ -15,8 +15,9 @@ $stmt->execute([$username]);
 $admin = $stmt->fetch();
 
 if ($admin && password_verify($password, $admin['password'])) {
+    session_regenerate_id(true);
     $_SESSION['admin_id'] = $admin['id'];
-    $_SESSION['admin_name'] = $admin['fullname'];
+    $_SESSION['admin_name'] = $admin['username'];
 
     echo json_encode(['success' => true]);
 } else {

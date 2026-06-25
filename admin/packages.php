@@ -29,7 +29,7 @@ $stmt->fetchAll(PDO::FETCH_ASSOC);
     include __DIR__ . '/includes/sidebar.php';
     ?>
 
-    <div class="ml-64 p-10">
+    <div class="lg:ml-64 p-6 pt-24 lg:pt-10">
 
     <h1 class="text-4xl font-bold mb-8">
     Packages
@@ -167,6 +167,24 @@ $stmt->fetchAll(PDO::FETCH_ASSOC);
     </div>
 
 </div>
+<script>
 
+const adminMenuBtn =
+document.getElementById('adminMenuBtn');
+
+const adminSidebar =
+document.getElementById('adminSidebar');
+
+if(adminMenuBtn){
+
+    adminMenuBtn.addEventListener('click', () => {
+
+        adminSidebar.classList.toggle('-translate-x-full');
+
+    });
+
+}
+
+</script>
 </body>
 </html>

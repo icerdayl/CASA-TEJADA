@@ -20,24 +20,78 @@ $packages = $stmt->fetchAll(PDO::FETCH_ASSOC);
   <title>Casa Tejada Reservation</title>
   <link rel="stylesheet" href="assets/css/style.css">
   <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
 <body class="bg-slate-100">
-    <nav class="fixed top-0 left-0 w-full z-50 transition-all duration-300 fixed bg-slate-100" id="navbar">
-      <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-        <a class="text-3xl font-bold text-black" id="logo">CASA TEJADA</a>
-        <ul class="flex gap-6 text-black">
-          <li><a href="index.php">Home</a></li>
-          <li><a href="about.php">About</a></li>
-          <li><a href="gallery.php">Gallery</a></li>
-          <li><a href="contact.php">Contact</a></li>
-          <li><a href="booking.php">Book Now</a></li>
-          <li><a href="track.php">Track Booking</a></li>
-          <li><a href="available_dates.php">Availability</a></li>
-        </ul>
-        <a href="booking.php" class="bg-amber-500 hover:bg-amber-600 px-5 py-2 rounded-xl text-white font-semibold">Book Now</a>
+    <nav
+  id="navbar"
+  class="fixed top-0 left-0 w-full z-50 transition-all duration-300">
+
+      <div class="max-w-7xl mx-auto px-6">
+
+          <div class="flex justify-between items-center h-20">
+
+              <!-- Logo -->
+              <a href="index.php"
+              class="text-3xl font-bold logoText">
+
+                  CASA TEJADA
+
+              </a>
+
+              <!-- Desktop Menu -->
+              <div class="hidden md:flex items-center gap-8">
+
+                  <a href="index.php">Home</a>
+                  <a href="about.php">About</a>
+                  <a href="gallery.php">Gallery</a>
+                  <a href="contact.php">Contact</a>
+                  <a href="booking.php">Book Now</a>
+                  <a href="track.php">Track Booking</a>
+                  <a href="available_dates.php">Availability</a>
+
+              </div>
+
+              <!-- Mobile Button -->
+              <button
+              id="menuBtn"
+              class="md:hidden text-3xl">
+
+                  ☰
+
+              </button>
+
+              <!-- Book Button -->
+              <a
+              href="booking.php"
+              class="hidden md:block bg-amber-500 hover:bg-amber-600 text-white px-6 py-3 rounded-2xl">
+
+                  Book Now
+
+              </a>
+
+          </div>
+
+          <!-- Mobile Menu -->
+
+          <div
+          id="mobileMenu"
+          class="hidden md:hidden bg-white rounded-xl shadow-lg p-4 space-y-4 absolute top-20 left-0 w-full z-50">
+
+              <a href="index.php" class="block">Home</a>
+              <a href="about.php" class="block">About</a>
+              <a href="gallery.php" class="block">Gallery</a>
+              <a href="contact.php" class="block">Contact</a>
+              <a href="booking.php" class="block">Book Now</a>
+              <a href="track.php" class="block">Track Booking</a>
+              <a href="availability.php" class="block">Availability</a>
+
+          </div>
+
       </div>
-    </nav>
+
+  </nav>
   <div class="max-w-4xl mx-auto py-20 px-5 ">
     <h1 class="text-4xl font-bold mb-8 text-center" data-aos="fade-up">Reserve Your Stay</h1>
     <form id="bookingForm" class="bg-white p-8 rounded-3xl shadow-xl space-y-5" enctype="multipart/form-data" data-aos="fade-up" data-aos-delay="200">
@@ -62,16 +116,22 @@ $packages = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <input type="checkbox" name="function_hall_ac">
         Function Hall AC (+₱2000)
       </label>
-      <input type="file" name="payment_proof" accept="image/*" required class="w-full border p-3 rounded-xl">
+      <input type="file" name="payment_proof" accept="image/*" capture="environment" required class="w-full border p-3 rounded-xl">
       <h2 class="text-2xl font-bold">
         Estimated Total:
         <span id="totalPrice">₱0</span>
       </h2>
-      <button type="submit" class="w-full bg-teal-600 text-white py-4 rounded-xl">Submit Reservation</button>
+        <div id="loader" hidden class="text-center">
+          <p class="text-xl text-teal-600">
+              Submitting Reservation...
+          </p>
+      </div>
+      <button type="submit" class="w-full bg-teal-600 text-white py-4 rounded-xl cursor-pointer">Submit Reservation</button>
     </form>
     <div
       id="bookingResult"
-      class="hidden mt-6 bg-green-100 border border-green-300 p-6 rounded-2xl">
+      hidden
+      class="mt-6 bg-green-100 border border-green-300 p-6 rounded-2xl">
 
     </div>
   </div>
@@ -85,5 +145,21 @@ AOS.init({
     duration: 1000,
     once: true
 });
+</script>
+<script>
+
+const menuBtn = document.getElementById('menuBtn');
+const mobileMenu = document.getElementById('mobileMenu');
+
+menuBtn.addEventListener('click', () => {
+
+    if (mobileMenu.style.display === 'none') {
+        mobileMenu.style.display = 'block';
+    } else {
+        mobileMenu.style.display = 'none';
+    }
+
+});
+
 </script>
 </html>

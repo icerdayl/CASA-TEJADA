@@ -1,83 +1,55 @@
-<?php
-$currentPage = basename($_SERVER['PHP_SELF']);
+<!-- Mobile Top Bar -->
+<div class="lg:hidden fixed top-0 left-0 w-full bg-white shadow-md z-50 flex justify-between items-center px-6 py-4">
 
-function sidebarLinkClass(string $page, string $baseClass = ''): string
-{
-    global $currentPage;
+    <h1 class="text-2xl font-bold text-teal-600">
+        Casa Tejada
+    </h1>
 
-    $activeClass = $currentPage === $page ? 'bg-slate-800 text-white' : 'text-slate-300 hover:bg-slate-800 hover:text-white';
+    <button id="adminMenuBtn" class="text-3xl">
+        ☰
+    </button>
 
-    return trim($baseClass . ' ' . $activeClass);
-}
-?>
+</div>
 
-<div class="w-64 bg-slate-900 text-white min-h-screen fixed shadow-2xl border-r border-slate-800">
+<!-- Sidebar -->
+<div id="adminSidebar"
+class="fixed top-0 left-0 h-full w-64 bg-teal-700 text-white p-6 transform -translate-x-full lg:translate-x-0 transition-transform duration-300 z-40">
 
-    <div class="p-6 border-b border-slate-700">
+    <h2 class="text-3xl font-bold mb-10 hidden lg:block">
+        Casa Tejada
+    </h2>
 
-        <h1 class="text-2xl font-bold">
-            CASA TEJADA
-        </h1>
+    <nav class="space-y-4 mt-16 lg:mt-0">
 
-        <p class="text-slate-400 text-sm">
-            Admin Panel
-        </p>
+        <a href="dashboard.php"
+        class="block hover:bg-teal-600 p-3 rounded">
+            Dashboard
+        </a>
 
-    </div>
+        <a href="bookings.php"
+        class="block hover:bg-teal-600 p-3 rounded">
+            Bookings
+        </a>
 
-    <nav class="p-4">
+        <a href="packages.php"
+        class="block hover:bg-teal-600 p-3 rounded">
+            Packages
+        </a>
 
-        <ul class="space-y-2">
+        <a href="gallery.php"
+        class="block hover:bg-teal-600 p-3 rounded">
+            Gallery
+        </a>
 
-            <li>
-                <a
-                href="dashboard.php"
-                class="block px-4 py-3 rounded-lg <?= sidebarLinkClass('dashboard.php') ?>">
-                🏠 Dashboard
-                </a>
-            </li>
+        <a href="calendar.php"
+        class="block hover:bg-teal-600 p-3 rounded">
+            Calendar
+        </a>
 
-            <li>
-                <a
-                href="bookings.php"
-                class="block px-4 py-3 rounded-lg <?= sidebarLinkClass('bookings.php') ?>">
-                📅 Bookings
-                </a>
-            </li>
-
-            <li>
-                <a
-                href="calendar.php"
-                class="block px-4 py-3 rounded-lg <?= sidebarLinkClass('calendar.php') ?>">
-                📆 Calendar
-                </a>
-            </li>
-
-            <li>
-                <a
-                href="packages.php"
-                class="block px-4 py-3 rounded-lg <?= sidebarLinkClass('packages.php') ?>">
-                📦 Packages
-                </a>
-            </li>
-
-            <li>
-                <a
-                href="gallery.php"
-                class="block px-4 py-3 rounded-lg <?= sidebarLinkClass('gallery.php') ?>">
-                🖼 Gallery
-                </a>
-            </li>
-
-            <li>
-                <a
-                href="logout.php"
-                class="block px-4 py-3 rounded-lg bg-red-600 hover:bg-red-700 text-white">
-                🚪 Logout
-                </a>
-            </li>
-
-        </ul>
+        <a href="../logout.php"
+        class="block bg-red-600 hover:bg-red-700 p-3 rounded mt-8">
+            Logout
+        </a>
 
     </nav>
 

@@ -23,7 +23,7 @@ $bookings = $stmt->fetchAll(PDO::FETCH_ASSOC);
 include __DIR__ . '/includes/sidebar.php';
 ?>
 
-    <div class="ml-64 p-10">
+    <div class="lg:ml-64 p-6 pt-24 lg:pt-10">
 
     <h1 class="text-4xl font-bold mb-8">
     Bookings
@@ -31,103 +31,134 @@ include __DIR__ . '/includes/sidebar.php';
 
     <div class="bg-white rounded-2xl shadow overflow-hidden">
 
-    <table class="w-full">
+    <!-- RESPONSIVE TABLE CONTAINER -->
+    <div class="overflow-x-auto">
 
-    <thead class="bg-slate-800 text-white">
+        <table class="w-full min-w-[1100px]">
 
-    <tr>
-        <th class="p-4 text-left">Customer</th>
-        <th class="p-4 text-left">Package</th>
-        <th class="p-4 text-left">Date</th>
-        <th class="p-4 text-left">Status</th>
-        <th class="p-4 text-left">Reference</th>
-        <th class="p-4 text-left">Receipt</th>
-        <th class="p-4 text-left"></th>
-    </tr>
+            <thead class="bg-slate-800 text-white">
 
-    </thead>
+                <tr>
+                    <th class="p-4 text-left">Customer</th>
+                    <th class="p-4 text-left">Package</th>
+                    <th class="p-4 text-left">Date</th>
+                    <th class="p-4 text-left">Status</th>
+                    <th class="p-4 text-left">Reference</th>
+                    <th class="p-4 text-left">Receipt</th>
+                    <th class="p-4 text-left">Actions</th>
+                </tr>
 
-    <tbody>
+            </thead>
 
-    <?php foreach($bookings as $booking): ?>
+            <tbody>
 
-    <tr class="border-b">
+            <?php foreach($bookings as $booking): ?>
 
-    <td class="p-4">
-    <?= htmlspecialchars($booking['customer_name']) ?>
-    </td>
+                <tr class="border-b hover:bg-slate-50">
 
-    <td class="p-4">
-    <?= htmlspecialchars($booking['package_name']) ?>
-    </td>
+                    <td class="p-4 whitespace-nowrap">
+                        <?= htmlspecialchars($booking['customer_name']) ?>
+                    </td>
 
-    <td class="p-4">
-    <?= $booking['reservation_date'] ?>
-    </td>
+                    <td class="p-4 whitespace-nowrap">
+                        <?= htmlspecialchars($booking['package_name']) ?>
+                    </td>
 
-    <td class="p-4">
-    <?= ucfirst($booking['status']) ?>
-    </td>
+                    <td class="p-4 whitespace-nowrap">
+                        <?= $booking['reservation_date'] ?>
+                    </td>
 
-    <td>
-    <?= $booking['reference_number'] ?>
-    </td>
- 
-    <td class="px-6">
+                    <td class="p-4 whitespace-nowrap">
+                        <?= ucfirst($booking['status']) ?>
+                    </td>
 
-    <a
-    class="text-blue-600 underline"
-    target="_blank"
-    href="../uploads/payments/<?= $booking['payment_proof'] ?>">
+                    <td class="p-4 whitespace-nowrap">
+                        <?= $booking['reference_number'] ?>
+                    </td>
 
-    View
+                    <td class="p-4 whitespace-nowrap">
 
-    </a>
+                        <a
+                        class="text-blue-600 underline"
+                        target="_blank"
+                        href="../uploads/payments/<?= $booking['payment_proof'] ?>">
 
-    </td>
+                        View
 
-    <td class="p-3 space-x-2">
+                        </a>
 
-    <a
-    class="bg-green-600 text-white px-3 py-1 rounded"
-    href="../api/approve_booking.php?id=<?= $booking['id'] ?>">
+                    </td>
 
-    Approve
+                    <td class="p-4 whitespace-nowrap">
 
-    </a>
+                        <div class="flex flex-wrap gap-2">
 
-    <a
-    class="bg-yellow-600 text-white px-3 py-1 rounded"
-    href="../api/reject_booking.php?id=<?= $booking['id'] ?>">
+                            <button
+                            class="approveBtn bg-green-600 hover:bg-green-700 text-white px-3 py-2 rounded"
+                            data-id="<?= $booking['id'] ?>">
 
-    Reject
+                            Approve
 
-    </a>
+                            </button>
 
-    <a
-    class="bg-red-600 text-white px-3 py-1 rounded"
-    onclick="return confirm('Delete booking?')"
-    href="../api/delete_booking.php?id=<?= $booking['id'] ?>">
+                            <button
+                            class="rejectBtn bg-yellow-600 hover:bg-yellow-700 text-white px-3 py-2 rounded"
+                            data-id="<?= $booking['id'] ?>">
 
-    Delete
+                            Reject
 
-    </a>
+                            </button>
 
-    </td>
+                            <button
+                            class="deleteBtn bg-red-600 hover:bg-red-700 text-white px-3 py-2 rounded"
+                            data-id="<?= $booking['id'] ?>">
 
-    </tr>
-    </tr>
+                            Delete
 
-    <?php endforeach; ?>
+                            </button>
 
-    </tbody>
+                        </div>
 
-    </table>
+                    </td>
+
+                </tr>
+
+            <?php endforeach; ?>
+
+            </tbody>
+
+        </table>
 
     </div>
 
-    </div>
+</div>
 
-</body>
+<script>
+
+const adminMenuBtn =
+document.getElementById('adminMenuBtn');
+
+const adminSidebar =
+document.getElementById('adminSidebar');
+
+if(adminMenuBtn){
+
+    adminMenuBtn.addEventListener('click', () => {
+
+        adminSidebar.classList.toggle('-translate-x-full');
+
+    });
+
+}
+
+</script>
+
+<script>
+document.querySelectorAll('.approveBtn').forEach(button=>{button.addEventListener('click',async()=>{const id =button.dataset.id;const response =await fetch('../api/approve_booking.php',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:'id='+encodeURIComponent(id)});const data =await response.json();alert(data.message);location.reload();});});
+document.querySelectorAll('.rejectBtn').forEach(button=>{button.addEventListener('click',async()=>{const id =button.dataset.id;const response =await fetch('../api/reject_booking.php',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:'id='+encodeURIComponent(id)});const data =await response.json();alert(data.message);location.reload();});});
+document.querySelectorAll('.deleteBtn').forEach(button=>{button.addEventListener('click',async()=>{if(!confirm('Delete booking?')){return;}const id =button.dataset.id;const response =await fetch('../api/delete_booking.php',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:'id='+encodeURIComponent(id)});const data =await response.json();alert(data.message);location.reload();});});
+</script>
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="stylesheet" href="../assets/css/style.css">
+
+</body>

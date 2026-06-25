@@ -6,29 +6,83 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.css" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 </head>
 
 <body class="bg-slate-100">
 
     <!-- NAVBAR -->
 
-    <nav class="fixed top-0 left-0 w-full z-50 transition-all duration-300 fixed bg-slate-100" id="navbar">
-      <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-        <a class="text-3xl font-bold text-black" id="logo">CASA TEJADA</a>
-        <ul class="flex gap-6 text-black">
-          <li><a href="index.php">Home</a></li>
-          <li><a href="about.php">About</a></li>
-          <li><a href="gallery.php">Gallery</a></li>
-          <li><a href="contact.php">Contact</a></li>
-          <li><a href="booking.php">Book Now</a></li>
-          <li><a href="track.php">Track Booking</a></li>
-          <li><a href="available_dates.php">Availability</a></li>
-        </ul>
-        <a href="booking.php" class="bg-amber-500 hover:bg-amber-600 px-5 py-2 rounded-xl text-white font-semibold">Book Now</a>
-      </div>
-    </nav>
+    <nav
+  id="navbar"
+  class="fixed top-0 left-0 w-full z-50 transition-all duration-300">
 
-    <div class="max-w-7xl mx-auto p-10">
+      <div class="max-w-7xl mx-auto px-6">
+
+          <div class="flex justify-between items-center h-20">
+
+              <!-- Logo -->
+              <a href="index.php"
+              class="text-3xl font-bold logoText">
+
+                  CASA TEJADA
+
+              </a>
+
+              <!-- Desktop Menu -->
+              <div class="hidden md:flex items-center gap-8">
+
+                  <a href="index.php">Home</a>
+                  <a href="about.php">About</a>
+                  <a href="gallery.php">Gallery</a>
+                  <a href="contact.php">Contact</a>
+                  <a href="booking.php">Book Now</a>
+                  <a href="track.php">Track Booking</a>
+                  <a href="available_dates.php">Availability</a>
+
+              </div>
+
+              <!-- Mobile Button -->
+              <button
+              id="menuBtn"
+              class="md:hidden text-3xl">
+
+                  ☰
+
+              </button>
+
+              <!-- Book Button -->
+              <a
+              href="booking.php"
+              class="hidden md:block bg-amber-500 hover:bg-amber-600 text-white px-6 py-3 rounded-2xl">
+
+                  Book Now
+
+              </a>
+
+          </div>
+
+          <!-- Mobile Menu -->
+
+          <div
+          id="mobileMenu"
+          class="hidden md:hidden bg-white rounded-xl shadow-lg p-4 space-y-4 absolute top-20 left-0 w-full z-50">
+
+              <a href="index.php" class="block">Home</a>
+              <a href="about.php" class="block">About</a>
+              <a href="gallery.php" class="block">Gallery</a>
+              <a href="contact.php" class="block">Contact</a>
+              <a href="booking.php" class="block">Book Now</a>
+              <a href="track.php" class="block">Track Booking</a>
+              <a href="availability.php" class="block">Availability</a>
+
+          </div>
+
+      </div>
+
+  </nav>
+
+    <div class="page-content max-w-7xl mx-auto p-10">
 
         <h1 class="text-5xl font-bold mt-8 mb-8 text-center" data-aos="fade-up">
 
@@ -110,6 +164,22 @@ AOS.init({
     duration: 1000,
     once: true
 });
+</script>
+<script>
+
+const menuBtn = document.getElementById('menuBtn');
+const mobileMenu = document.getElementById('mobileMenu');
+
+menuBtn.addEventListener('click', () => {
+
+    if (mobileMenu.style.display === 'none') {
+        mobileMenu.style.display = 'block';
+    } else {
+        mobileMenu.style.display = 'none';
+    }
+
+});
+
 </script>
 </body>
 </html>
