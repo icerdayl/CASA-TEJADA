@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 echo password_hash(
     'admin123',

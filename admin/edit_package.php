@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 require_once '../config/auth.php';
 require_once '../config/database.php';
@@ -57,92 +57,91 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 <html>
 <head>
 
-<title>Edit Package</title>
-
-<script src="https://cdn.tailwindcss.com"></script>
+    <title>Edit Package</title> 
+    <script src="https://cdn.tailwindcss.com"></script>
 
 </head>
 
 <body class="bg-slate-100">
 
-<?php
-include __DIR__ . '/includes/sidebar.php';
-?>
+    <?php
+    include __DIR__ . '/includes/sidebar.php';
+    ?>
 
-<div class="ml-64 p-10">
+    <div class="ml-64 p-10">
 
-<h1 class="text-4xl font-bold mb-8">
-Edit Package
-</h1>
+        <h1 class="text-4xl font-bold mb-8">
+            Edit Package
+        </h1>
 
-<form
-method="POST"
-class="bg-white p-8 rounded-2xl shadow max-w-2xl">
+        <form
+            method="POST"
+            class="bg-white p-8 rounded-2xl shadow max-w-2xl">
 
-<label class="font-semibold">
-Package Name
-</label>
+            <label class="font-semibold">
+                Package Name
+            </label>
 
-<input
-type="text"
-name="package_name"
-value="<?= htmlspecialchars($package['package_name']) ?>"
-class="w-full border p-3 rounded-lg mb-4"
-required>
+            <input
+            type="text"
+            name="package_name"
+            value="<?= htmlspecialchars($package['package_name']) ?>"
+            class="w-full border p-3 rounded-lg mb-4"
+            required>
 
-<label class="font-semibold">
-Description
-</label>
+            <label class="font-semibold">
+                Description
+            </label>
 
-<textarea
-name="description"
-class="w-full border p-3 rounded-lg mb-4"
-required><?= htmlspecialchars($package['description']) ?></textarea>
+            <textarea
+            name="description"
+            class="w-full border p-3 rounded-lg mb-4"
+            required><?= htmlspecialchars($package['description']) ?></textarea>
 
-<label class="font-semibold">
-Pax Limit
-</label>
+            <label class="font-semibold">
+                Pax Limit
+            </label>
 
-<input
-type="number"
-name="pax_limit"
-value="<?= $package['pax_limit'] ?>"
-class="w-full border p-3 rounded-lg mb-4"
-required>
+            <input
+            type="number"
+            name="pax_limit"
+            value="<?= $package['pax_limit'] ?>"
+            class="w-full border p-3 rounded-lg mb-4"
+            required>
 
-<label class="font-semibold">
-Bedrooms
-</label>
+            <label class="font-semibold">
+                Bedrooms
+            </label>
 
-<input
-type="number"
-name="bedrooms"
-value="<?= $package['bedrooms'] ?>"
-class="w-full border p-3 rounded-lg mb-4"
-required>
+            <input
+            type="number"
+            name="bedrooms"
+            value="<?= $package['bedrooms'] ?>"
+            class="w-full border p-3 rounded-lg mb-4"
+            required>
 
-<label class="font-semibold">
-Price
-</label>
+            <label class="font-semibold">
+                Price
+            </label>
 
-<input
-type="number"
-step="0.01"
-name="price"
-value="<?= $package['price'] ?>"
-class="w-full border p-3 rounded-lg mb-6"
-required>
+            <input
+            type="number"
+            step="0.01"
+            name="price"
+            value="<?= $package['price'] ?>"
+            class="w-full border p-3 rounded-lg mb-6"
+            required>
 
-<button
-class="bg-teal-600 text-white px-6 py-3 rounded-lg">
+            <button
+                class="bg-teal-600 text-white px-6 py-3 rounded-lg">
 
-Save Changes
+                Save Changes
 
-</button>
+            </button>
 
-</form>
+        </form>
 
-</div>
+    </div>
 
 </body>
 </html>

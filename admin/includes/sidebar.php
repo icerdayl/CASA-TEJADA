@@ -1,4 +1,4 @@
-<!-- Mobile Top Bar -->
+﻿<!-- Mobile Top Bar -->
 <div class="lg:hidden fixed top-0 left-0 w-full bg-white shadow-md z-50 flex justify-between items-center px-6 py-4">
 
     <h1 class="text-2xl font-bold text-teal-600">
@@ -46,7 +46,7 @@ class="fixed top-0 left-0 h-full w-64 bg-teal-700 text-white p-6 transform -tran
             Calendar
         </a>
 
-        <a href="../logout.php"
+        <a href="logout.php"
         class="block bg-red-600 hover:bg-red-700 p-3 rounded mt-8">
             Logout
         </a>

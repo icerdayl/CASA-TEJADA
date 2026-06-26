@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 require_once '../config/auth.php';
 
@@ -47,57 +47,57 @@ class="bg-white p-6 rounded-2xl shadow">
 
 <script>
 
-document.addEventListener(
-'DOMContentLoaded',
-function(){
+    document.addEventListener(
+        'DOMContentLoaded',
+        function(){
 
-const calendarEl =
-document.getElementById(
-'calendar'
-);
+            const calendarEl =
+            document.getElementById(
+            'calendar'
+            );
 
-const calendar =
-new FullCalendar.Calendar(
+            const calendar =
+            new FullCalendar.Calendar(
 
-calendarEl,
+            calendarEl,
 
-{
+            {
 
-initialView:
-'dayGridMonth',
+                initialView:
+                'dayGridMonth',
 
-height:700,
+                height:700,
 
-events:
-'../api/get_calendar_events.php'
+                events:
+                '../api/get_calendar_events.php'
 
-}
+            }
 
-);
+        );
 
-calendar.render();
+            calendar.render();
 
-}
-);
+        }
+    );
 
 </script>
 <script>
 
-const adminMenuBtn =
-document.getElementById('adminMenuBtn');
+    const adminMenuBtn =
+    document.getElementById('adminMenuBtn');
 
-const adminSidebar =
-document.getElementById('adminSidebar');
+    const adminSidebar =
+    document.getElementById('adminSidebar');
 
-if(adminMenuBtn){
+    if(adminMenuBtn){
 
-    adminMenuBtn.addEventListener('click', () => {
+        adminMenuBtn.addEventListener('click', () => {
 
-        adminSidebar.classList.toggle('-translate-x-full');
+            adminSidebar.classList.toggle('-translate-x-full');
 
-    });
+        });
 
-}
+    }
 
 </script>
 </body>

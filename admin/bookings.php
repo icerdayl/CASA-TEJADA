@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 require_once '../config/auth.php';
 require_once '../config/database.php';
@@ -135,28 +135,28 @@ include __DIR__ . '/includes/sidebar.php';
 
 <script>
 
-const adminMenuBtn =
-document.getElementById('adminMenuBtn');
+    const adminMenuBtn =
+    document.getElementById('adminMenuBtn');
 
-const adminSidebar =
-document.getElementById('adminSidebar');
+    const adminSidebar =
+    document.getElementById('adminSidebar');
 
-if(adminMenuBtn){
+    if(adminMenuBtn){
 
-    adminMenuBtn.addEventListener('click', () => {
+        adminMenuBtn.addEventListener('click', () => {
 
-        adminSidebar.classList.toggle('-translate-x-full');
+            adminSidebar.classList.toggle('-translate-x-full');
 
-    });
+        });
 
-}
+    }
 
 </script>
 
 <script>
-document.querySelectorAll('.approveBtn').forEach(button=>{button.addEventListener('click',async()=>{const id =button.dataset.id;const response =await fetch('../api/approve_booking.php',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:'id='+encodeURIComponent(id)});const data =await response.json();alert(data.message);location.reload();});});
-document.querySelectorAll('.rejectBtn').forEach(button=>{button.addEventListener('click',async()=>{const id =button.dataset.id;const response =await fetch('../api/reject_booking.php',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:'id='+encodeURIComponent(id)});const data =await response.json();alert(data.message);location.reload();});});
-document.querySelectorAll('.deleteBtn').forEach(button=>{button.addEventListener('click',async()=>{if(!confirm('Delete booking?')){return;}const id =button.dataset.id;const response =await fetch('../api/delete_booking.php',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:'id='+encodeURIComponent(id)});const data =await response.json();alert(data.message);location.reload();});});
+    document.querySelectorAll('.approveBtn').forEach(button=>{button.addEventListener('click',async()=>{const id =button.dataset.id;const response =await fetch('../api/approve_booking.php',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:'id='+encodeURIComponent(id)});const data =await response.json();alert(data.message);location.reload();});});
+    document.querySelectorAll('.rejectBtn').forEach(button=>{button.addEventListener('click',async()=>{const id =button.dataset.id;const response =await fetch('../api/reject_booking.php',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:'id='+encodeURIComponent(id)});const data =await response.json();alert(data.message);location.reload();});});
+    document.querySelectorAll('.deleteBtn').forEach(button=>{button.addEventListener('click',async()=>{if(!confirm('Delete booking?')){return;}const id =button.dataset.id;const response =await fetch('../api/delete_booking.php',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:'id='+encodeURIComponent(id)});const data =await response.json();alert(data.message);location.reload();});});
 </script>
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="stylesheet" href="../assets/css/style.css">

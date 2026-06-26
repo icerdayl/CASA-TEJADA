@@ -1,145 +1,174 @@
-<?php
+﻿<?php
 
 require_once 'config/database.php';
 
-$stmt =
-$pdo->query(
-"SELECT *
-FROM gallery
-ORDER BY id DESC"
+$stmt = $pdo->query(
+    "SELECT *
+     FROM gallery
+     ORDER BY id DESC"
 );
 
-$photos =
-$stmt->fetchAll(PDO::FETCH_ASSOC);
+$photos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Gallery | Casa Tejada</title>
-	<link rel="stylesheet" href="assets/css/style.css">
-	<link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
-	<script src="https://cdn.tailwindcss.com"></script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Gallery | Casa Tejada</title>
+
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <link
+        href="https://unpkg.com/aos@2.3.4/dist/aos.css"
+        rel="stylesheet"
+    >
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
 </head>
+
 <body class="bg-slate-100">
-	<div class="page-content max-w-7xl mx-auto px-5 py-20">
+
+    <div class="page-content max-w-7xl mx-auto px-5 py-20">
+
         <!-- NAVBAR -->
-    <nav
-  id="navbar"
-  class="fixed top-0 left-0 w-full z-50 transition-all duration-300">
+        <nav
+            id="navbar"
+            class="fixed top-0 left-0 w-full z-50 transition-all duration-300 bg-slate-100"
+        >
 
-      <div class="max-w-7xl mx-auto px-6">
+            <div class="max-w-7xl mx-auto px-6">
 
-          <div class="flex justify-between items-center h-20">
+                <div class="flex justify-between items-center h-20">
 
-              <!-- Logo -->
-              <a href="index.php"
-              class="text-3xl font-bold logoText">
+                    <!-- Logo -->
+                    <a
+                        href="home.php"
+                        class="text-3xl font-bold logoText"
+                    >
+                        CASA TEJADA
+                    </a>
 
-                  CASA TEJADA
+                    <!-- Desktop Menu -->
+                    <div class="hidden md:flex items-center gap-8">
 
-              </a>
+                        <a href="home.php">Home</a>
+                        <a href="about.php">About</a>
+                        <a href="gallery.php">Gallery</a>
+                        <a href="contact.php">Contact</a>
+                        <a href="booking.php">Book Now</a>
+                        <a href="track.php">Track Booking</a>
+                        <a href="available_dates.php">Availability</a>
 
-              <!-- Desktop Menu -->
-              <div class="hidden md:flex items-center gap-8">
+                    </div>
 
-                  <a href="index.php">Home</a>
-                  <a href="about.php">About</a>
-                  <a href="gallery.php">Gallery</a>
-                  <a href="contact.php">Contact</a>
-                  <a href="booking.php">Book Now</a>
-                  <a href="track.php">Track Booking</a>
-                  <a href="available_dates.php">Availability</a>
+                    <!-- Mobile Button -->
+                    <button
+                        id="menuBtn"
+                        class="md:hidden text-3xl"
+                    >
+                        ☰
+                    </button>
 
-              </div>
+                    <!-- Book Button -->
+                    <a
+                        href="booking.php"
+                        class="hidden md:block bg-amber-500 hover:bg-amber-600 text-white px-6 py-3 rounded-2xl"
+                    >
+                        Book Now
+                    </a>
 
-              <!-- Mobile Button -->
-              <button
-              id="menuBtn"
-              class="md:hidden text-3xl">
+                </div>
 
-                  ☰
+                <!-- Mobile Menu -->
+                <div
+                    id="mobileMenu"
+                    class="hidden md:hidden bg-white rounded-xl shadow-lg p-4 space-y-4 absolute top-20 left-0 w-full z-50"
+                >
 
-              </button>
+                    <a href="home.php" class="block">Home</a>
+                    <a href="about.php" class="block">About</a>
+                    <a href="gallery.php" class="block">Gallery</a>
+                    <a href="contact.php" class="block">Contact</a>
+                    <a href="booking.php" class="block">Book Now</a>
+                    <a href="track.php" class="block">Track Booking</a>
+                    <a href="available_dates.php" class="block">Availability</a>
 
-              <!-- Book Button -->
-              <a
-              href="booking.php"
-              class="hidden md:block bg-amber-500 hover:bg-amber-600 text-white px-6 py-3 rounded-2xl">
+                </div>
 
-                  Book Now
+            </div>
 
-              </a>
+        </nav>
 
-          </div>
+        <h1
+            class="text-5xl font-bold mb-8 text-center"
+            data-aos="fade-up"
+        >
+            Gallery
+        </h1>
 
-          <!-- Mobile Menu -->
+        <div
+            class="grid md:grid-cols-3 gap-6"
+            data-aos="fade-up"
+            data-aos-delay="200"
+        >
 
-          <div
-          id="mobileMenu"
-          class="hidden md:hidden bg-white rounded-xl shadow-lg p-4 space-y-4 absolute top-20 left-0 w-full z-50">
+            <?php foreach ($photos as $photo): ?>
 
-              <a href="index.php" class="block">Home</a>
-              <a href="about.php" class="block">About</a>
-              <a href="gallery.php" class="block">Gallery</a>
-              <a href="contact.php" class="block">Contact</a>
-              <a href="booking.php" class="block">Book Now</a>
-              <a href="track.php" class="block">Track Booking</a>
-              <a href="availability.php" class="block">Availability</a>
+                <div
+                    class="bg-white rounded-2xl shadow overflow-hidden"
+                    data-aos="fade-up"
+                >
 
-          </div>
+                    <img
+                        src="uploads/gallery/<?= $photo['image'] ?>"
+                        alt="<?= htmlspecialchars($photo['title']) ?>"
+                        class="w-full h-64 object-cover"
+                    >
 
-      </div>
+                    <div class="p-4">
 
-  </nav>
-		<h1
-		class="text-5xl font-bold mb-8 text-center"
-		data-aos="fade-up">
-			Gallery
-		</h1>
+                        <h3 class="text-xl font-semibold">
+                            <?= htmlspecialchars($photo['title']) ?>
+                        </h3>
 
-		<div class="grid md:grid-cols-3 gap-6" data-aos="fade-up" data-aos-delay="200">
-			<?php foreach ($photos as $photo): ?>
-				<div class="bg-white rounded-2xl shadow overflow-hidden" data-aos="fade-up">
-					<img
-						src="uploads/gallery/<?= $photo['image'] ?>"
-						alt="<?= htmlspecialchars($photo['title']) ?>"
-						class="w-full h-64 object-cover">
+                    </div>
 
-					<div class="p-4">
-						<h3 class="text-xl font-semibold">
-							<?= htmlspecialchars($photo['title']) ?>
-						</h3>
-					</div>
-				</div>
-			<?php endforeach; ?>
-		</div>
-	</div>
-<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+                </div>
 
-<script>
-AOS.init({
-    duration: 1000,
-    once: true
-});
-</script>
-<script>
+            <?php endforeach; ?>
 
-const menuBtn = document.getElementById('menuBtn');
-const mobileMenu = document.getElementById('mobileMenu');
+        </div>
 
-menuBtn.addEventListener('click', () => {
+    </div>
 
-    if (mobileMenu.style.display === 'none') {
-        mobileMenu.style.display = 'block';
-    } else {
-        mobileMenu.style.display = 'none';
-    }
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 
-});
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+    </script>
 
-</script>
+    <script>
+        const menuBtn =
+            document.getElementById('menuBtn');
+
+        const mobileMenu =
+            document.getElementById('mobileMenu');
+
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+    </script>
+
 </body>
+
 </html>

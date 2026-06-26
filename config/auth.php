@@ -1,2 +1,2 @@
-<?php
+﻿<?php
 session_start();$timeout = 1800; // 30 minutes// Session timeoutif (    isset($_SESSION['LAST_ACTIVITY']) &&    (time() - $_SESSION['LAST_ACTIVITY']) > $timeout) {    session_unset();    session_destroy();    header("Location: login.php");    exit;}$_SESSION['LAST_ACTIVITY'] = time();// Check if logged inif (!isset($_SESSION['admin_id'])) {    header("Location: login.php");    exit;}?>

@@ -1,190 +1,186 @@
-<?php
+﻿<?php
 
 require_once '../config/auth.php';
 require_once '../config/database.php';
 
-$stmt =
-$pdo->query(
-"SELECT *
-FROM packages
-ORDER BY id DESC"
+$stmt = $pdo->query(
+    "SELECT *
+     FROM packages
+     ORDER BY id DESC"
 );
 
-$packages =
-$stmt->fetchAll(PDO::FETCH_ASSOC);
+$packages = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Packages</title>
-	<link rel="stylesheet" href="../assets/css/style.css">
+    <title>Packages</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
 <body class="bg-slate-100">
 
-    <?php
-    include __DIR__ . '/includes/sidebar.php';
-    ?>
+    <?php include __DIR__ . '/includes/sidebar.php'; ?>
 
     <div class="lg:ml-64 p-6 pt-24 lg:pt-10">
 
-    <h1 class="text-4xl font-bold mb-8">
-    Packages
-    </h1>
+        <h1 class="text-4xl font-bold mb-8">
+            Packages
+        </h1>
 
-<!-- PACKAGE CARDS -->
+        <!-- PACKAGE CARDS -->
+        <div class="flex flex-col xl:flex-row gap-8 items-start">
 
-<div class="flex flex-col xl:flex-row gap-8 items-start">
+            <!-- LEFT SIDE : ADD FORM -->
+            <div class="w-full xl:w-[420px] flex-shrink-0">
 
-    <!-- LEFT SIDE : ADD FORM -->
-    <div class="w-full xl:w-[420px] flex-shrink-0">
+                <div class="bg-white p-8 rounded-2xl shadow sticky top-10">
 
-        <div class="bg-white p-8 rounded-2xl shadow sticky top-10">
+                    <h2 class="text-3xl font-bold mb-6">
+                        Add New Package
+                    </h2>
 
-            <h2 class="text-3xl font-bold mb-6">
-                Add New Package
-            </h2>
+                    <form
+                        action="../api/add_package.php"
+                        method="POST"
+                        class="space-y-4"
+                    >
 
-            <form
-            action="../api/add_package.php"
-            method="POST"
-            class="space-y-4">
+                        <input
+                            type="text"
+                            name="package_name"
+                            placeholder="Package Name"
+                            required
+                            class="w-full border p-3 rounded-lg"
+                        >
 
-                <input
-                type="text"
-                name="package_name"
-                placeholder="Package Name"
-                required
-                class="w-full border p-3 rounded-lg">
+                        <textarea
+                            name="description"
+                            placeholder="Description"
+                            required
+                            rows="4"
+                            class="w-full border p-3 rounded-lg"
+                        ></textarea>
 
-                <textarea
-                name="description"
-                placeholder="Description"
-                required
-                rows="4"
-                class="w-full border p-3 rounded-lg"></textarea>
+                        <div class="grid grid-cols-2 gap-4">
 
-                <div class="grid grid-cols-2 gap-4">
+                            <input
+                                type="number"
+                                name="pax_limit"
+                                placeholder="Pax Limit"
+                                required
+                                class="w-full border p-3 rounded-lg"
+                            >
 
-                    <input
-                    type="number"
-                    name="pax_limit"
-                    placeholder="Pax Limit"
-                    required
-                    class="w-full border p-3 rounded-lg">
+                            <input
+                                type="number"
+                                name="bedrooms"
+                                placeholder="Bedrooms"
+                                required
+                                class="w-full border p-3 rounded-lg"
+                            >
 
-                    <input
-                    type="number"
-                    name="bedrooms"
-                    placeholder="Bedrooms"
-                    required
-                    class="w-full border p-3 rounded-lg">
+                        </div>
 
-                </div>
+                        <input
+                            type="number"
+                            step="0.01"
+                            name="price"
+                            placeholder="Price"
+                            required
+                            class="w-full border p-3 rounded-lg"
+                        >
 
-                <input
-                type="number"
-                step="0.01"
-                name="price"
-                placeholder="Price"
-                required
-                class="w-full border p-3 rounded-lg">
+                        <button
+                            class="w-full bg-teal-600 hover:bg-teal-700 text-white px-8 py-3 rounded-lg"
+                        >
+                            Add Package
+                        </button>
 
-                <button
-                class="w-full bg-teal-600 hover:bg-teal-700 text-white px-8 py-3 rounded-lg">
-
-                    Add Package
-
-                </button>
-
-            </form>
-
-        </div>
-
-    </div>
-
-    <!-- RIGHT SIDE : PACKAGE CARDS -->
-    <div class="flex-1">
-
-        <div class="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 gap-6">
-
-            <?php foreach($packages as $package): ?>
-
-            <div class="bg-white rounded-2xl shadow p-6 hover:shadow-xl transition">
-
-                <h2 class="text-2xl font-bold mb-3">
-                    <?= htmlspecialchars($package['package_name']) ?>
-                </h2>
-
-                <p class="text-gray-600 mb-4">
-                    <?= htmlspecialchars($package['description']) ?>
-                </p>
-
-                <p class="mb-2">
-                    <strong>Pax Limit:</strong>
-                    <?= $package['pax_limit'] ?>
-                </p>
-
-                <p class="mb-4">
-                    <strong>Bedrooms:</strong>
-                    <?= $package['bedrooms'] ?>
-                </p>
-
-                <p class="text-3xl text-teal-600 font-bold mb-6">
-                    ₱<?= number_format($package['price'],2) ?>
-                </p>
-
-                <div class="flex gap-3">
-
-                    <a
-                    href="edit_package.php?id=<?= $package['id'] ?>"
-                    class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg">
-
-                        Edit
-
-                    </a>
-
-                    <a
-                    href="../api/delete_package.php?id=<?= $package['id'] ?>"
-                    onclick="return confirm('Delete this package?')"
-                    class="bg-red-600 hover:bg-red-700 text-white px-5 py-2 rounded-lg">
-
-                        Delete
-
-                    </a>
+                    </form>
 
                 </div>
 
             </div>
 
-            <?php endforeach; ?>
+            <!-- RIGHT SIDE : PACKAGE CARDS -->
+            <div class="flex-1">
+
+                <div class="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 gap-6">
+
+                    <?php foreach ($packages as $package): ?>
+
+                        <div class="bg-white rounded-2xl shadow p-6 hover:shadow-xl transition">
+
+                            <h2 class="text-2xl font-bold mb-3">
+                                <?= htmlspecialchars($package['package_name']) ?>
+                            </h2>
+
+                            <p class="text-gray-600 mb-4">
+                                <?= htmlspecialchars($package['description']) ?>
+                            </p>
+
+                            <p class="mb-2">
+                                <strong>Pax Limit:</strong>
+                                <?= $package['pax_limit'] ?>
+                            </p>
+
+                            <p class="mb-4">
+                                <strong>Bedrooms:</strong>
+                                <?= $package['bedrooms'] ?>
+                            </p>
+
+                            <p class="text-3xl text-teal-600 font-bold mb-6">
+                                ₱<?= number_format($package['price'], 2) ?>
+                            </p>
+
+                            <div class="flex gap-3">
+
+                                <a
+                                    href="edit_package.php?id=<?= $package['id'] ?>"
+                                    class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg"
+                                >
+                                    Edit
+                                </a>
+
+                                <a
+                                    href="../api/delete_package.php?id=<?= $package['id'] ?>"
+                                    onclick="return confirm('Delete this package?')"
+                                    class="bg-red-600 hover:bg-red-700 text-white px-5 py-2 rounded-lg"
+                                >
+                                    Delete
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    <?php endforeach; ?>
+
+                </div>
+
+            </div>
 
         </div>
 
     </div>
 
-</div>
-<script>
+    <script>
+        const adminMenuBtn =
+            document.getElementById('adminMenuBtn');
 
-const adminMenuBtn =
-document.getElementById('adminMenuBtn');
+        const adminSidebar =
+            document.getElementById('adminSidebar');
 
-const adminSidebar =
-document.getElementById('adminSidebar');
+        if (adminMenuBtn) {
+            adminMenuBtn.addEventListener('click', () => {
+                adminSidebar.classList.toggle('-translate-x-full');
+            });
+        }
+    </script>
 
-if(adminMenuBtn){
-
-    adminMenuBtn.addEventListener('click', () => {
-
-        adminSidebar.classList.toggle('-translate-x-full');
-
-    });
-
-}
-
-</script>
 </body>
 </html>

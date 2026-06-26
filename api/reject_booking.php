@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 header('Content-Type: application/json');
 
@@ -15,6 +15,6 @@ WHERE id=?"
 $stmt->execute([$id]);
 
 echo json_encode([
-	'success' => true,
-	'message' => 'Booking rejected successfully.'
+    'success' => true,
+    'message' => 'Booking rejected successfully.'
 ]);

@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 require_once '../config/auth.php';
 require_once '../config/database.php';
@@ -27,7 +27,7 @@ $totalPhotos = $pdo->query("SELECT COUNT(*) FROM gallery")->fetchColumn();
   <div class="lg:ml-64 p-6 pt-24 lg:pt-10">
 
   <h1 class="text-4xl font-bold mb-8">
-  Dashboard
+    Dashboard
   </h1>
 
     <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
@@ -57,7 +57,7 @@ $totalPhotos = $pdo->query("SELECT COUNT(*) FROM gallery")->fetchColumn();
             </h2>
 
             <p class="text-5xl font-bold mt-3">
-                ₱<?= number_format($totalRevenue, 2) ?>
+                â‚±<?= number_format($totalRevenue, 2) ?>
             </p>
         </div>
 
@@ -135,21 +135,21 @@ $totalPhotos = $pdo->query("SELECT COUNT(*) FROM gallery")->fetchColumn();
   </div>
 <script>
 
-const adminMenuBtn =
-document.getElementById('adminMenuBtn');
+    const adminMenuBtn =
+    document.getElementById('adminMenuBtn');
 
-const adminSidebar =
-document.getElementById('adminSidebar');
+    const adminSidebar =
+    document.getElementById('adminSidebar');
 
-if(adminMenuBtn){
+    if(adminMenuBtn){
 
-    adminMenuBtn.addEventListener('click', () => {
+        adminMenuBtn.addEventListener('click', () => {
 
-        adminSidebar.classList.toggle('-translate-x-full');
+            adminSidebar.classList.toggle('-translate-x-full');
 
-    });
+        });
 
-}
+    }
 
 </script>
 </body>

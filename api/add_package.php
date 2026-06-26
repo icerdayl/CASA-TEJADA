@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 header('Content-Type: application/json');
 
@@ -11,24 +11,24 @@ $bedrooms = $_POST['bedrooms'];
 $price = $_POST['price'];
 
 $stmt = $pdo->prepare(
-"INSERT INTO packages(
-package_name,
-description,
-pax_limit,
-bedrooms,
-price
-)
-VALUES(
-?,?,?,?,?
-)"
+    "INSERT INTO packages (
+        package_name,
+        description,
+        pax_limit,
+        bedrooms,
+        price
+    )
+    VALUES (
+        ?, ?, ?, ?, ?
+    )"
 );
 
 $stmt->execute([
-$name,
-$description,
-$pax,
-$bedrooms,
-$price
+    $name,
+    $description,
+    $pax,
+    $bedrooms,
+    $price
 ]);
 
 header("Location: ../admin/packages.php");
