@@ -66,6 +66,19 @@ Follow these steps to set up the website on your local server:
 #### 3. Tracking Reservation Status (track.php)
 * Usage: Users input their unique Reference ID to check whether their current resort booking is Pending, Confirmed, or Cancelled.
 
+### B. Administrative Features (Protected Pages)
+
+#### 1. Admin Login & Session Management (login.php, logout.php)
+* Usage: Secure access portal for resort administrators. Implements session validation on every protected page and session_regenerate_id() to prevent unauthorized access.
+
+#### 2. Staff Dashboard (admin_dashboard.php)
+* Usage: Allows administrators to review submitted reservations, update booking statuses (Pending, Confirmed, Cancelled) dynamically via AJAX, and monitor resort availability.
+
+### C. Mobile Application Component
+
+#### 1. RESTful API Connectivity
+* Usage: Provides mobile application connection to the PHP backend via JSON payloads, allowing clients to perform mobile tracking actions natively.
+
 ## 4. System Screenshots
 
 ### Home Page Interface
